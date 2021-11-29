@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membre index{% endblock %}
+
+{% block body %}
+    <h1>Membre index</h1>
+   
+   
+{{ form_start(form) }}
+
+<div class="form-row align-items-end" >
+ <div class="col">
+   {{ form_row(form.nameMembre) }}
+
+ </div>
+
+  <div class="col">
+   <div class="form-group">
+ <button type="submit" class="btn btn-success">Rechercher</button>
+    </div>
+ </div>
+</div>
+ {{ form_end(form) }}
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name Membre</th>
+                <th>Cin</th>
+                <th>Email membre</th>
+                <th>Date De Naissance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membre in membres %}
+            <tr>
+                <td>{{ membre.id }}</td>
+                <td>{{ membre.nameMembre }}</td>
+                <td>{{ membre.cin }}</td>
+                <td>{{ membre.emailmembre }}</td>
+                <td>{{ membre.dateDeNaissance ? membre.dateDeNaissance|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('membre_show', {'id': membre.id}) }}" class="btn btn-primary">Details</a>
+                    <a href="{{ path('membre_edit', {'id': membre.id}) }}" class="btn btn-warning">edit</a>
+                                        </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('membre_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}

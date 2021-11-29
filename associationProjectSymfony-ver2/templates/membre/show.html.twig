@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membre{% endblock %}
+
+{% block body %}
+    <h1>Membre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ membre.id }}</td>
+            </tr>
+            <tr>
+                <th>NameMembre</th>
+                <td>{{ membre.nameMembre }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ membre.cin }}</td>
+            </tr>
+            <tr>
+                <th>Emailmembre</th>
+                <td>{{ membre.emailmembre }}</td>
+            </tr>
+            <tr>
+                <th>DateDeNaissance</th>
+                <td>{{ membre.dateDeNaissance ? membre.dateDeNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('membre_index') }}" class="btn btn-primary">back to list</a>
+
+    <a href="{{ path('membre_edit', {'id': membre.id}) }}" class="btn btn-warning">edit</a>
+<a href="{{ path('membre_edit', {'id': membre.id}) }}" class="btn btn-danger" > remove</a>
+    {{ include('membre/_delete_form.html.twig') }}
+{% endblock %}

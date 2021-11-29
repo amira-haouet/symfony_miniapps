@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membre index{% endblock %}
+
+{% block body %}
+    <h1>Membre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First_name</th>
+                <th>Last_name</th>
+                <th>Date_de_naissance</th>
+                <th>Email</th>
+                <th>Cin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membre in membres %}
+            <tr>
+                <td>{{ membre.id }}</td>
+                <td>{{ membre.firstName }}</td>
+                <td>{{ membre.lastName }}</td>
+                <td>{{ membre.dateDeNaissance ? membre.dateDeNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ membre.email }}</td>
+                <td>{{ membre.cin }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('membre_controller2_show', {'id': membre.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('membre_controller2_edit', {'id': membre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('membre_controller2_new') }}">Create new</a>
+{% endblock %}
